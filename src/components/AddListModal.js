@@ -3,12 +3,12 @@ import {
   StyleSheet,
   Text,
   View,
-  KeyboardAvoidingView,
   TouchableOpacity,
   TextInput,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import Colors from "../../Colors";
+import tempData from "../tempData";
 
 const bgColor = [
   "#5cd859",
@@ -22,20 +22,31 @@ const bgColor = [
 
 const AddListModal = ({ closeModal }) => {
   const [name, setName] = useState("");
-  const [pickColor, setColor] = useState(bgColor[0]);
+  const [color, setColor] = useState(bgColor[0]);
 
   const RenderColor = () => {
-    return bgColor.map((color) => (
+    return bgColor.map((item) => (
       <TouchableOpacity
-        key={color}
-        style={[styles.colorSelect, { backgroundColor: color }]}
-        onPress={() => setColor(color)}
+        key={item}
+        style={[styles.colorSelect, { backgroundColor: item }]}
+        onPress={() => setColor(item)}
       />
     ));
   };
 
+  const createTodo = () => {
+    tempData.push({
+      name,
+      color,
+      todos: [],
+    });
+
+    setName("");
+    closeModal();
+  };
+
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
+    <View style={styles.container} behavior="padding">
       <TouchableOpacity
         style={{ position: "absolute", top: 32, right: 32 }}
         onPress={closeModal}>
@@ -57,22 +68,16 @@ const AddListModal = ({ closeModal }) => {
             justifyContent: "space-between",
             marginTop: 12,
           }}>
-          {bgColor.map((color) => (
-            <TouchableOpacity
-              key={color}
-              style={[styles.colorSelect, { backgroundColor: color }]}
-              onPress={() => setColor(color)}
-            />
-          ))}
-          {/* <RenderColor /> */}
+          <RenderColor />
         </View>
 
         <TouchableOpacity
-          style={[styles.create, { backgroundColor: pickColor }]}>
+          style={[styles.create, { backgroundColor: color }]}
+          onPress={createTodo}>
           <Text style={{ color: Colors.white, fontWeight: "700" }}>Create</Text>
         </TouchableOpacity>
       </View>
-    </KeyboardAvoidingView>
+    </View>
   );
 };
 

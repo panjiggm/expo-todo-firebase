@@ -23,6 +23,8 @@ export default class App extends Component {
     this.setState({ addTodoVisible: !this.state.addTodoVisible });
   }
 
+  renderList = (list) => <TodoList list={list} />;
+
   render() {
     return (
       <View style={styles.container}>
@@ -57,7 +59,7 @@ export default class App extends Component {
             keyExtractor={(item) => item.name}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
-            renderItem={({ item }) => <TodoList list={item} />}
+            renderItem={({ item }) => this.renderList(item)}
           />
         </View>
       </View>
@@ -94,8 +96,9 @@ const styles = StyleSheet.create({
   },
   add: {
     color: colors.blue,
-    fontWeight: "600",
+    fontWeight: "700",
     fontSize: 14,
     marginTop: 8,
+    textAlign: "center",
   },
 });
