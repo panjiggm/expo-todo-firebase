@@ -29,7 +29,7 @@ export default tempData = [
     todos: [
       {
         title: "Siapin Duit",
-        completed: false,
+        completed: true,
       },
       {
         title: "Pinjem Ransel ke Temen",
@@ -41,7 +41,7 @@ export default tempData = [
       },
       {
         title: "Sewa Penginapan",
-        completed: false,
+        completed: true,
       },
     ],
   },
@@ -63,7 +63,7 @@ export default tempData = [
       },
       {
         title: "Siapin Otak Bersih",
-        completed: false,
+        completed: true,
       },
     ],
   },
